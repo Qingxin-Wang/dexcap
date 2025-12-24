@@ -354,6 +354,8 @@ with ContextObject(
     session_was_focused = False  # Check for a common problem
     for frame_index, frame_state in enumerate(context.frame_loop()):
         # print(context.session_state)
+        if frame_state.predicted_display_time <= 0:
+            continue
         if context.session_state == xr.SessionState.FOCUSED:
             session_was_focused = True
             active_action_set = xr.ActiveActionSet(
